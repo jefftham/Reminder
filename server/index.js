@@ -1,5 +1,6 @@
 #!/usr/bin/env nodejs
 
+/*
 const http = require('http');
 const https = require('https');
 const config = require('./config');
@@ -8,52 +9,47 @@ const letsencrypt = require('./letsencrypt');
 // Create Express web app
 const app = require('./webapp');
 
+// create  https server
 
-// const server = require('http').Server(app);
-
-// If an incoming request uses
-// a protocol other than HTTPS,
-// redirect that request to the
-// same url but with HTTPS
-const forceSSL = function () {
-    return function (req, res, next) {
-        if (req.headers['x-forwarded-proto'] !== 'https') {
-            return res.redirect(['https://', req.get('Host'), req.url].join(''));
-        }
-        next();
-    };
-};
-
-// check if it running in Heroku
-if (process.env.NODE && ~process.env.NODE.indexOf("heroku")) {
-
-    console.log('server.js dectected env as HEROKU.');
-    // Instruct the app
-    // to use the forceSSL
-    // middleware
-    app.use(forceSSL());
-
-
-    // Start the app by listening on the default
-    // Heroku port
-    app.listen(process.env.HTTP_PORT || 8080);
-
+if (config.FORCE_HTTPS) {
+  letsencrypt(app);
 } else {
-
-    // create  https server
-
-    if (config.FORCE_HTTPS) {
-
-        letsencrypt(app);
-
-    } else {
-        let server = http.createServer(app);
-        server.listen(config.HTTP_PORT, () => {
-            console.log("Server running......")
-            console.log("http://localhost:" + config.HTTP_PORT + "/");
-        });
-    }
-
-
-
+  let server = http.createServer(app);
+  server.listen(config.HTTP_PORT, () => {
+    console.log('Server running......');
+    console.log('http://localhost:' + config.HTTP_PORT + '/');
+  });
 }
+*/
+let path = require('path');
+const express = require('express');
+const next = require('next');
+
+const dev = process.env.NODE_ENV !== 'prod';
+const app = next({ dev, dir: path.join(__dirname, '../src/') });
+const handle = app.getRequestHandler();
+
+app
+  .prepare()
+  .then(() => {
+    const server = express();
+
+    server.get('/p/:title', (req, res) => {
+      const actualPage = '/post';
+      const queryParams = { title: req.params.title };
+      app.render(req, res, actualPage, queryParams);
+    });
+
+    server.get('*', (req, res) => {
+      return handle(req, res);
+    });
+
+    server.listen(3000, err => {
+      if (err) throw err;
+      console.log('> Ready on http://localhost:3000');
+    });
+  })
+  .catch(ex => {
+    console.error(ex.stack);
+    process.exit(1);
+  });

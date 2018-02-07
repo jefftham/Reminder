@@ -4,10 +4,11 @@
 env.secret.json
 
 # compiled output
-# /dist
+/dist
 /instantclient
 /tmp
 /out-tsc
+/.next
 
 # dependencies
 /node_modules
