@@ -2,9 +2,16 @@ import { withRouter } from 'next/router';
 
 const ActiveLink = ({ children, router, href }) => {
   const defaultStyle = {
-    marginRight: 10,
-    color: router.pathname === href ? 'red' : 'blue',
+    margin: '0px 5px 15px 0px' ,
+    fontSize:'20px',
+    width:'200px'
+    //color: router.pathname === href ? 'red' : 'black',
   };
+
+  const assignClasses =
+    router.pathname === href
+      ? 'btn btn-outline-primary active'
+      : 'btn btn-outline-primary';
 
   const handleClick = e => {
     e.preventDefault();
@@ -12,9 +19,15 @@ const ActiveLink = ({ children, router, href }) => {
   };
 
   return (
-    <a href={href} onClick={handleClick} style={defaultStyle}>
+    <button
+      class={assignClasses}
+      type="button"
+      href={href}
+      onClick={handleClick}
+      style={defaultStyle}
+    >
       {children}
-    </a>
+    </button>
   );
 };
 
