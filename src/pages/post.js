@@ -1,4 +1,4 @@
-import Layout from '../components/MyLayout.js';
+import Layout from '../components/layout/MyLayout.js';
 import Markdown from 'react-markdown';
 
 export default props => (

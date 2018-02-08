@@ -64,6 +64,7 @@ popd
 # install npm dependencies
 ## sudo npm install -g @angular/cli@1.2.0
 npm install -g node-gyp
+npm install -g react react-dom next
 npm install deasync
 npm install
 

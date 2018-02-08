@@ -1,4 +1,5 @@
-import Header from './Header';
+import NavBar from './NavBar';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const layoutStyle = {
   margin: 20,
@@ -8,7 +9,7 @@ const layoutStyle = {
 
 const Layout = props => (
   <div style={layoutStyle}>
-    <Header />
+    <NavBar />
     {props.children}
   </div>
 );
