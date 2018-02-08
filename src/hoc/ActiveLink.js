@@ -1,10 +1,10 @@
 import { withRouter } from 'next/router';
 
-const ActiveLink = ({ children, router, href }) => {
+const ActiveLink = ({ children, router, href, prefetch }) => {
   const defaultStyle = {
-    margin: '0px 5px 15px 0px' ,
-    fontSize:'20px',
-    width:'200px'
+    margin: '0px 5px 15px 0px',
+    fontSize: '20px',
+    width: '200px',
     //color: router.pathname === href ? 'red' : 'black',
   };
 
@@ -18,9 +18,16 @@ const ActiveLink = ({ children, router, href }) => {
     router.push(href);
   };
 
+
+  // prefetch the page, only work on production
+  if (prefetch && prefetch === 'true') {
+ // router.prefetch(href);
+
+  }
+
   return (
     <button
-      class={assignClasses}
+      className={assignClasses}
       type="button"
       href={href}
       onClick={handleClick}

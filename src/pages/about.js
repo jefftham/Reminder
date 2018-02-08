@@ -1,4 +1,4 @@
-import Layout from '../components/layout/MyLayout.js';
+import Layout from '../components/layout/Layout.js';
 import { Alert } from 'reactstrap';
 
 export default () => (

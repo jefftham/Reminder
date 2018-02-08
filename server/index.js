@@ -34,6 +34,10 @@ app
   .then(() => {
     const server = express();
 
+    // Run the app by serving the static files
+    // in the dist directory
+   // server.use(express.static(path.join(__dirname, '../dist/static')));
+
     server.get('/p/:title', (req, res) => {
       const actualPage = '/post';
       const queryParams = { title: req.params.title };
