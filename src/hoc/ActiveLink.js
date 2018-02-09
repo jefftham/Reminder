@@ -1,3 +1,4 @@
+import React from 'react';
 import { withRouter } from 'next/router';
 
 const ActiveLink = ({ children, router, href, prefetch }) => {
@@ -5,7 +6,7 @@ const ActiveLink = ({ children, router, href, prefetch }) => {
     margin: '0px 5px 15px 0px',
     fontSize: '20px',
     width: '200px',
-    //color: router.pathname === href ? 'red' : 'black',
+    // color: router.pathname === href ? 'red' : 'black',
   };
 
   const assignClasses =
@@ -18,17 +19,15 @@ const ActiveLink = ({ children, router, href, prefetch }) => {
     router.push(href);
   };
 
-
   // prefetch the page, only work on production
   if (prefetch && prefetch === 'true') {
- // router.prefetch(href);
-
+    // router.prefetch(href);
   }
 
   return (
     <button
       className={assignClasses}
-      type="button"
+      type='button'
       href={href}
       onClick={handleClick}
       style={defaultStyle}

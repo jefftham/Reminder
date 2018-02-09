@@ -21,11 +21,11 @@ if (config.FORCE_HTTPS) {
   });
 }
 */
-let path = require('path');
+const path = require('path');
 const express = require('express');
 const next = require('next');
 
-const dev = process.env.NODE_ENV !== 'prod';
+const dev = !(process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production');
 const app = next({ dev, dir: path.join(__dirname, '../src/') });
 const handle = app.getRequestHandler();
 
@@ -36,7 +36,7 @@ app
 
     // Run the app by serving the static files
     // in the dist directory
-   // server.use(express.static(path.join(__dirname, '../dist/static')));
+    // server.use(express.static(path.join(__dirname, '../dist/static')));
 
     server.get('/p/:title', (req, res) => {
       const actualPage = '/post';

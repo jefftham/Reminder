@@ -1,0 +1,39 @@
+.fancyBtn {
+  display: inline-block;
+  position: relative;
+  padding: 5px 20px;
+  border: 2px solid #fda;
+  color: #fda;
+  font-family: 'Dancing Script', serif;
+  font-style: italic;
+  font-size: 20px;
+  text-decoration:blue;
+  margin: 0px 20px auto 0px;
+  transition: color 0.4s;
+  font-weight: bold;
+}
+
+.fancyBtn:after {
+  content: " ";
+  border: 2px solid rgba(0, 0, 0, 0);
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  transition: all 0.4s;
+}
+
+.fancyBtn:hover {
+  color: #eee
+}
+
+.fancyBtn:hover:after {
+  border: 2px solid #fda;
+  width: calc(100% - 10px);
+  height: calc(100% + 10px);
+}
