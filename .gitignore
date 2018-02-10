@@ -9,6 +9,8 @@ env.secret.json
 /tmp
 /out-tsc
 /.next
+/build
+/app/build
 
 # dependencies
 /node_modules

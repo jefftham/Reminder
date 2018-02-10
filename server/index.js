@@ -23,37 +23,28 @@ if (config.FORCE_HTTPS) {
 */
 const path = require('path');
 const express = require('express');
-const next = require('next');
+const next = require('./next');
 
-const dev = !(process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production');
-const app = next({ dev, dir: path.join(__dirname, '../src/') });
-const handle = app.getRequestHandler();
+const app = express();
 
-app
-  .prepare()
-  .then(() => {
-    const server = express();
+app.use('/', express.static(path.join(__dirname, '../public')));
 
-    // Run the app by serving the static files
-    // in the dist directory
-    // server.use(express.static(path.join(__dirname, '../dist/static')));
+const start = async port => {
+    // Couple Next.js with our express server.
+    // app and handle from "next" will now be available as req.app and req.handle.
+    await next(app);
 
-    server.get('/p/:title', (req, res) => {
-      const actualPage = '/post';
-      const queryParams = { title: req.params.title };
-      app.render(req, res, actualPage, queryParams);
-    });
+    // Normal routing, if you need it.
+    // Use your SSR logic here.
+    // Even if you don't do explicit routing the pages inside app/pages
+    // will still get rendered as per their normal route.
+    app.get('/main', (req, res) =>
+        req.app.render(req, res, '/', {
+            routeParam: req.params.routeParam
+        }));
 
-    server.get('*', (req, res) => {
-      return handle(req, res);
-    });
+    app.listen(port);
+};
 
-    server.listen(3000, err => {
-      if (err) throw err;
-      console.log('> Ready on http://localhost:3000');
-    });
-  })
-  .catch(ex => {
-    console.error(ex.stack);
-    process.exit(1);
-  });
+// Start the express server.
+start(3000);

@@ -1,79 +1,156 @@
 {
-  "name": "reminder",
-  "version": "1.0.0",
-  "description": "A self-learning project that use React as frontend, Nodejs as backend, Firebase as database. User can add schedulers and send text messages and/or emails to themselves or anyone.",
-  "scripts": {
-    "prestart": "npm run build",
-    "start": "cross-env NODE_ENV=prod node ./server/index.js",
-    "build": "next build src",
-    "dev": "cross-env NODE_ENV=dev node \"./server/index.js\"  ",
-    "debug": "cross-env NODE_ENV=debug  \"./server/index.js\" "
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jefftham/Reminder.git"
-  },
-  "keywords": [
-    ""
-  ],
-  "author": "Jeff Tham <Jeff.Tham@live.com>",
-  "license": "MIT",
-  "dependencies": {
-    "@zeit/next-css": "0.0.7",
-    "axios": "^0.17.1",
-    "body-parser": "^1.17.2",
-    "bootstrap": "^4.0.0",
-    "comment-json": "^1.1.3",
-    "connect-flash": "^0.1.1",
-    "csurf": "^1.9.0",
-    "csv-write-stream": "^2.0.0",
-    "d3": "^4.10.0",
-    "deasync": "^0.1.10",
-    "dotenv": "^4.0.0",
-    "email-to-phone": "^1.0.1",
-    "express": "^4.15.4",
-    "express-session": "^1.15.5",
-    "firebase-admin": "^5.2.1",
-    "font-awesome": "^4.7.0",
-    "greenlock-express": "^2.0.12",
-    "jquery": "^3.2.1",
-    "later": "^1.2.0",
-    "le-challenge-fs": "^2.0.8",
-    "le-store-certbot": "^2.0.5",
-    "lodash": "^4.17.4",
-    "moment": "^2.18.1",
-    "morgan": "^1.8.2",
-    "next": "^5.0.0",
-    "nodemailer": "^4.0.1",
-    "nodemailer-smtp-transport": "^2.7.4",
-    "pg": "^7.1.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-markdown": "^3.1.5",
-    "reactstrap": "^5.0.0-beta",
-    "redirect-https": "^1.1.4",
-    "rxjs": "^5.4.2",
-    "sanitize-html": "^1.14.1",
-    "twilio": "^3.6.2",
-    "underscore": "^1.8.3",
-    "xml2js": "^0.4.19"
-  },
-  "devDependencies": {
-    "@types/jasmine": "2.5.53",
-    "@types/jquery": "^3.2.11",
-    "@types/node": "~8.0.20",
-    "babel-eslint": "^8.2.1",
-    "cross-env": "^5.0.5",
-    "eslint": "^4.17.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.6.1",
-    "eslint-watch": "^3.1.3",
-    "express": "^4.15.4",
-    "npm-run-all": "^4.1.0",
-    "ts-node": "~3.3.0",
-    "typescript": "^2.4.2",
-    "xml-loader": "^1.2.1"
-  }
+    "name": "reminder",
+    "version": "1.0.0",
+    "description": "A self-learning project that use React as frontend, Nodejs as backend, Firebase as database. User can add schedulers and send text messages and/or emails to themselves or anyone.",
+    "scripts": {
+        "prestart": "npm run build",
+        "start": "cross-env NODE_ENV=prod node ./server/index.js",
+        "build": "cd app && next build",
+        "fdev": "next ./app",
+        "dev": "cross-env NODE_ENV=dev nodemon --ignore app/ \"./server/index.js\"  ",
+        "debug": "cross-env NODE_ENV=debug nodemon --ignore app/ \"./server/index.js\" "
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jefftham/Reminder.git"
+    },
+    "keywords": [
+        ""
+    ],
+    "author": "Jeff Tham <Jeff.Tham@live.com>",
+    "license": "MIT",
+    "dependencies": {
+        "autoprefixer": "7.1.5",
+        "axios": "^0.17.1",
+        "babel-plugin-module-resolver": "^2.7.1",
+        "babel-plugin-wrap-in-js": "^1.1.0",
+        "body-parser": "^1.17.2",
+        "bootstrap": "^4.0.0",
+        "comment-json": "^1.1.3",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.4.3",
+        "csurf": "^1.9.0",
+        "csv-write-stream": "^2.0.0",
+        "d3": "^4.10.0",
+        "deasync": "^0.1.10",
+        "dotenv": "^4.0.0",
+        "email-to-phone": "^1.0.1",
+        "express": "^4.15.4",
+        "express-session": "^1.15.5",
+        "firebase-admin": "^5.2.1",
+        "font-awesome": "^4.7.0",
+        "glob": "^7.1.2",
+        "greenlock-express": "^2.0.12",
+        "jquery": "^3.2.1",
+        "later": "^1.2.0",
+        "le-challenge-fs": "^2.0.8",
+        "le-store-certbot": "^2.0.5",
+        "lodash": "^4.17.4",
+        "moment": "^2.18.1",
+        "morgan": "^1.8.2",
+        "next": "^5.0.0",
+        "node-sass": "^4.4.0",
+        "nodemailer": "^4.0.1",
+        "nodemailer-smtp-transport": "^2.7.4",
+        "normalize.css": "^7.0.0",
+        "pg": "^7.1.2",
+        "postcss-easy-import": "^3.0.0",
+        "postcss-loader": "^2.0.7",
+        "prop-types": "^15.6.0",
+        "raw-loader": "^0.5.1",
+        "react": "^16.2.0",
+        "react-bootstrap": "^0.31.5",
+        "react-dom": "^16.2.0",
+        "react-markdown": "^3.1.5",
+        "reactstrap": "^5.0.0-beta",
+        "redirect-https": "^1.1.4",
+        "rxjs": "^5.4.2",
+        "sanitize-html": "^1.14.1",
+        "sass-loader": "^6.0.6",
+        "twilio": "^3.6.2",
+        "underscore": "^1.8.3",
+        "xml2js": "^0.4.19"
+    },
+    "devDependencies": {
+        "@types/jasmine": "2.5.53",
+        "@types/jquery": "^3.2.11",
+        "@types/node": "~8.0.20",
+        "babel-eslint": "^8.2.1",
+        "cross-env": "^5.1.3",
+        "eslint": "^4.17.0",
+        "eslint-config-airbnb": "^16.1.0",
+        "eslint-plugin-import": "^2.8.0",
+        "eslint-plugin-jsx-a11y": "^6.0.3",
+        "eslint-plugin-react": "^7.6.1",
+        "eslint-watch": "^3.1.3",
+        "express": "^4.15.4",
+        "npm-run-all": "^4.1.0",
+        "nodemon": "^1.12.1",
+        "ts-node": "~3.3.0",
+        "xml-loader": "^1.2.1"
+    },
+    "eslintConfig": {
+        "plugins": [
+            "react"
+        ],
+        "parser": "babel-eslint",
+        "parserOptions": {
+            "ecmaVersion": 6,
+            "sourceType": "module",
+            "ecmaFeatures": {
+                "jsx": true,
+                "experimentalObjectRestSpread": true
+            }
+        },
+        "extends": "airbnb",
+        "globals": {
+            "document": true,
+            "window": true,
+            "process": true
+        },
+        "env": {
+            "es6": true,
+            "browser": true,
+            "node": true,
+            "mocha": true
+        },
+        "settings": {
+            "import/core-modules": [
+                "styled-jsx/css"
+            ]
+        },
+        "rules": {
+            "arrow-parens": "off",
+            "global-require": "off",
+            "indent": [
+                "error",
+                4
+            ],
+            "no-console": "off",
+            "comma-dangle": "off",
+            "no-underscore-dangle": "off",
+            "func-names": "off",
+            "no-use-before-define": "off",
+            "react/jsx-indent": [
+                "error",
+                4
+            ],
+            "react/jsx-indent-props": [
+                "error",
+                4
+            ],
+            "react/prop-types": 0,
+            "react/jsx-filename-extension": [
+                1,
+                {
+                    "extensions": [
+                        ".js",
+                        ".jsx"
+                    ]
+                }
+            ],
+            "react/react-in-jsx-scope": "off",
+            "react/no-danger": "off"
+        }
+    }
 }
