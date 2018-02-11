@@ -1,22 +1,23 @@
 {
     "name": "reminder",
     "version": "1.0.0",
-    "description": "A self-learning project that use React as frontend, Nodejs as backend, Firebase as database. User can add schedulers and send text messages and/or emails to themselves or anyone.",
+    "description":
+        "A self-learning project that use React as frontend, Nodejs as backend, Firebase as database. User can add schedulers and send text messages and/or emails to themselves or anyone.",
     "scripts": {
-        "prestart": "npm run build",
+        "prestart": "cross-env npm-run-all clean build",
         "start": "cross-env NODE_ENV=prod node ./server/index.js",
         "build": "cd app && next build",
+        "dev": "cross-env npm-run-all clean bdev",
         "fdev": "next ./app",
-        "dev": "cross-env NODE_ENV=dev nodemon --ignore app/ \"./server/index.js\"  ",
-        "debug": "cross-env NODE_ENV=debug nodemon --ignore app/ \"./server/index.js\" "
+        "bdev": "cross-env NODE_ENV=dev nodemon --ignore app/ \"./server/index.js\"  ",
+        "debug": "cross-env NODE_ENV=debug nodemon --ignore app/ \"./server/index.js\" ",
+        "clean": "rimraf app/build"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/jefftham/Reminder.git"
     },
-    "keywords": [
-        ""
-    ],
+    "keywords": [""],
     "author": "Jeff Tham <Jeff.Tham@live.com>",
     "license": "MIT",
     "dependencies": {
@@ -90,9 +91,7 @@
         "xml-loader": "^1.2.1"
     },
     "eslintConfig": {
-        "plugins": [
-            "react"
-        ],
+        "plugins": ["react"],
         "parser": "babel-eslint",
         "parserOptions": {
             "ecmaVersion": 6,
@@ -115,38 +114,24 @@
             "mocha": true
         },
         "settings": {
-            "import/core-modules": [
-                "styled-jsx/css"
-            ]
+            "import/core-modules": ["styled-jsx/css"]
         },
         "rules": {
             "arrow-parens": "off",
             "global-require": "off",
-            "indent": [
-                "error",
-                4
-            ],
+            "indent": ["error", 4],
             "no-console": "off",
             "comma-dangle": "off",
             "no-underscore-dangle": "off",
             "func-names": "off",
             "no-use-before-define": "off",
-            "react/jsx-indent": [
-                "error",
-                4
-            ],
-            "react/jsx-indent-props": [
-                "error",
-                4
-            ],
+            "react/jsx-indent": ["error", 4],
+            "react/jsx-indent-props": ["error", 4],
             "react/prop-types": 0,
             "react/jsx-filename-extension": [
                 1,
                 {
-                    "extensions": [
-                        ".js",
-                        ".jsx"
-                    ]
+                    "extensions": [".js", ".jsx"]
                 }
             ],
             "react/react-in-jsx-scope": "off",

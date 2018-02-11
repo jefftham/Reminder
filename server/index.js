@@ -30,20 +30,34 @@ const app = express();
 app.use('/', express.static(path.join(__dirname, '../public')));
 
 const start = async port => {
-    // Couple Next.js with our express server.
-    // app and handle from "next" will now be available as req.app and req.handle.
-    await next(app);
+    try {
+        // Couple Next.js with our express server.
+        // app and handle from "next" will now be available as req.app and req.handle.
+        await next(app);
 
-    // Normal routing, if you need it.
-    // Use your SSR logic here.
-    // Even if you don't do explicit routing the pages inside app/pages
-    // will still get rendered as per their normal route.
-    app.get('/main', (req, res) =>
-        req.app.render(req, res, '/', {
-            routeParam: req.params.routeParam
-        }));
+        // Normal routing, if you need it.
+        // Use your SSR logic here.
+        // Even if you don't do explicit routing the pages inside app/pages
+        // will still get rendered as per their normal route.
+        app.get('/main', (req, res) =>
+            req.app.render(req, res, '/', {
+                routeParam: req.params.routeParam
+            }));
 
-    app.listen(port);
+        app.get('/p/:title', (req, res) => {
+            const actualPage = '/post';
+            const queryParams = { title: req.params.title };
+            req.app.render(req, res, actualPage, queryParams);
+        });
+
+        app.listen(port, err => {
+            if (err) throw err;
+            console.log(`> Ready on http://localhost:${port}`);
+        });
+    } catch (error) {
+        console.error(error.stack);
+        process.exit(1);
+    }
 };
 
 // Start the express server.

@@ -9,7 +9,7 @@ export default props => (
             <Markdown
                 source={`
                   This is our blog post.
-                  Yes. We can have a [link](/link).
+                  Yes. We can have a [https://github.com/jefftham/Reminder](https://github.com/jefftham/Reminder).
                   And we can have a title as well.
 
                   ### This is a title
